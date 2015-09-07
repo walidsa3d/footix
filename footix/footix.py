@@ -2,46 +2,53 @@
 # -*- coding: utf-8 -*-
 # @Author: walid
 
-import requests
-from bs4 import BeautifulSoup as bs
-from termcolor import colored
 import argparse
 
-base_url="http://www.getyourfixtures.com/all/fixtures/today/football"
-offset='+01:00'
-offset=requests.utils.quote(offset)
-timezone_url="http://www.getyourfixtures.com/setTimeZone.php?offset={}".format(offset)
+import requests
+
+from bs4 import BeautifulSoup as bs
+from termcolor import colored
+
+base_url = "http://www.getyourfixtures.com/all/fixtures/today/football"
+offset = '+01:00'
+offset = requests.utils.quote(offset)
+timezone_url = "http://www.getyourfixtures.com/setTimeZone.php?offset={}".format(
+    offset)
+
 
 def get_data():
-    matches=[]
-    session=requests.Session()
+    matches = []
+    session = requests.Session()
     session.get(timezone_url)
-    response=session.get(base_url)
-    soup=bs(response.content,"lxml")
-    for div in soup.find_all("div",{"class":"match"}):
+    response = session.get(base_url)
+    soup = bs(response.content, "lxml")
+    for div in soup.find_all("div", {"class": "match"}):
         if div.select("div.home") and div.select("div.away"):
-            time=div.select("div.time span")[0].get_text().strip()
-            home=div.select("div.home")[0].get_text().strip()
-            away=div.select("div.away")[0].get_text().strip()
-            stations=div.select("div.stations ul li.country-qa")
+            time = div.select("div.time span")[0].get_text().strip()
+            home = div.select("div.home")[0].get_text().strip()
+            away = div.select("div.away")[0].get_text().strip()
+            stations = div.select("div.stations ul li.country-qa")
             if stations:
-                stations=[station.text.strip().replace('BeIN Sport Arabia','BeIN') for station in stations]
+                stations = [station.text.strip().replace(
+                    'BeIN Sport Arabia', 'BeIN') for station in stations]
             else:
-                stations=[]
-            matches.append({"time":time,"station":stations,"home":home,"away":away})
+                stations = []
+            matches.append(
+                {"time": time, "station": stations, "home": home, "away": away})
     return matches
 
+
 def main():
-    data=get_data()
+    data = get_data()
     parser = argparse.ArgumentParser(usage="-h for full usage")
-    parser.add_argument('-v', help='search query',action="store_true")
+    parser.add_argument('-v', help='search query', action="store_true")
     args = parser.parse_args()
     if args.v:
-        data=[x for x in data if x['station']]
+        data = [x for x in data if x['station']]
     args = parser.parse_args()
     for match in data:
         match_time = colored(match['time'], "red", "on_yellow")
-        channels=colored(" ".join(match['station']), "blue", "on_white")
+        channels = colored(" ".join(match['station']), "blue", "on_white")
         first_team = colored(match['home'], "green")
         second_team = colored(match['away'], "cyan")
         vs = colored('VS', "white", attrs=['bold', 'blink'])
