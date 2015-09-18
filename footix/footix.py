@@ -4,6 +4,7 @@
 
 import argparse
 
+import re
 import requests
 
 from bs4 import BeautifulSoup as bs
@@ -29,8 +30,8 @@ def get_data():
             away = div.select("div.away")[0].get_text().strip()
             stations = div.select("div.stations ul li.country-qa")
             if stations:
-                stations = [station.text.strip().replace(
-                    'BeIN Sport Arabia', 'BeIN') for station in stations]
+                stations = [clean_channel_name(station.text)
+                            for station in stations]
             else:
                 stations = []
             matches.append(
@@ -38,12 +39,20 @@ def get_data():
     return matches
 
 
+def clean_channel_name(channel_name):
+    stop_words = ['Sports', 'Sport', 'Channel', 'Television', 'Arabia', 'TV']
+    for word in stop_words:
+        channel_name = re.sub(r'%s\s?' % word, '', channel_name, re.I)
+    return channel_name.strip()
+
+
 def main():
     data = get_data()
     parser = argparse.ArgumentParser(usage="-h for full usage")
-    parser.add_argument('-v', help='search query', action="store_true")
+    parser.add_argument('-w', help='watchable game', action="store_true")
+    parser.add_argument('-f', help='only favorite team', action="store_true")
     args = parser.parse_args()
-    if args.v:
+    if args.w:
         data = [x for x in data if x['station']]
     args = parser.parse_args()
     for match in data:
@@ -53,3 +62,4 @@ def main():
         second_team = colored(match['away'], "cyan")
         vs = colored('VS', "white", attrs=['bold', 'blink'])
         print u"{:10} {:40} {:40} {:30} {:40}".format(match_time, channels, first_team, vs, second_team)
+main()
