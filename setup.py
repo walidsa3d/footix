@@ -11,7 +11,7 @@ requires = [i.strip() for i in open("requirements.txt").readlines()]
 
 setup(
     name='footix',
-    version='1.0.1',
+    version='1.0.2',
     description="soccer schedule",
     long_description=read_md('README.md'),
     author='Walid Saad',
