@@ -10,14 +10,15 @@ import requests
 from bs4 import BeautifulSoup as bs
 from termcolor import colored
 
-base_url = "http://www.getyourfixtures.com/all/fixtures/today/football"
-offset = '+01:00'
-offset = requests.utils.quote(offset)
+TODAY_URL = "http://www.getyourfixtures.com/all/fixtures/today/football"
+TOMORROW_URL= "http://www.getyourfixtures.com/all/fixtures/tomorrow/football"
+time_offset = '+01:00'
+time_offset = requests.utils.quote(time_offset)
 timezone_url = "http://www.getyourfixtures.com/setTimeZone.php?offset={}".format(
-    offset)
+    time_offset)
 
 
-def get_data():
+def get_data(base_url):
     matches = []
     session = requests.Session()
     session.get(timezone_url)
@@ -47,14 +48,16 @@ def clean_channel_name(channel_name):
 
 
 def main():
-    data = get_data()
+    data = get_data(TODAY_URL)
     parser = argparse.ArgumentParser(usage="-h for full usage")
     parser.add_argument('-w', help='watchable game', action="store_true")
-    parser.add_argument('-f', help='only favorite team', action="store_true")
+    parser.add_argument('--today', help='todays games', action="store_true")
+    parser.add_argument('--tomorrow', help='tomorrow games', action="store_true")
     args = parser.parse_args()
+    if args.tomorrow:
+        data=get_data(TOMORROW_URL)
     if args.w:
         data = [x for x in data if x['station']]
-    args = parser.parse_args()
     for match in data:
         match_time = colored(match['time'], "red", "on_yellow")
         channels = colored(" ".join(match['station']), "blue", "on_white")
