@@ -17,12 +17,13 @@ time_offset = '+01:00'
 time_offset = requests.utils.quote(time_offset)
 timezone_url = "http://www.getyourfixtures.com/setTimeZone.php?offset={}".format(
     time_offset)
+requests_cache.install_cache(
+    '/tmp/footix_cache', backend='sqlite', expire_after=7200)
 
 
 def get_data(base_url):
     matches = []
-    requests_cache.install_cache('/tmp/footix_cache', backend='sqlite', expire_after=7200)
-    session = requests.Session()
+    session = requests_cache.CachedSession()
     session.get(timezone_url)
     response = session.get(base_url)
     soup = bs(response.content, "lxml")
@@ -52,7 +53,8 @@ def clean_channel_name(channel_name):
 def main():
     parser = argparse.ArgumentParser(usage="-h for full usage")
     parser.add_argument('-w', help='watchable game', action="store_true")
-    parser.add_argument('--today','-t', help='todays games', action="store_true")
+    parser.add_argument(
+        '--today', '-t', help='todays games', action="store_true")
     parser.add_argument(
         '--tomorrow', '-to', help='tomorrow games', action="store_true")
     args = parser.parse_args()
@@ -72,3 +74,4 @@ def main():
         vs = colored('VS', "white", attrs=['bold', 'blink'])
         print u"{:10} {:40} {:40} {:30} {:40}".format(match_time, channels, first_team, vs, second_team)
 
+main()
