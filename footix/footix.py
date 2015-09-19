@@ -6,12 +6,13 @@ import argparse
 
 import re
 import requests
+import requests_cache
 
 from bs4 import BeautifulSoup as bs
 from termcolor import colored
 
 TODAY_URL = "http://www.getyourfixtures.com/all/fixtures/today/football"
-TOMORROW_URL= "http://www.getyourfixtures.com/all/fixtures/tomorrow/football"
+TOMORROW_URL = "http://www.getyourfixtures.com/all/fixtures/tomorrow/football"
 time_offset = '+01:00'
 time_offset = requests.utils.quote(time_offset)
 timezone_url = "http://www.getyourfixtures.com/setTimeZone.php?offset={}".format(
@@ -20,6 +21,7 @@ timezone_url = "http://www.getyourfixtures.com/setTimeZone.php?offset={}".format
 
 def get_data(base_url):
     matches = []
+    requests_cache.install_cache('/tmp/footix_cache', backend='sqlite', expire_after=7200)
     session = requests.Session()
     session.get(timezone_url)
     response = session.get(base_url)
@@ -48,14 +50,18 @@ def clean_channel_name(channel_name):
 
 
 def main():
-    data = get_data(TODAY_URL)
     parser = argparse.ArgumentParser(usage="-h for full usage")
     parser.add_argument('-w', help='watchable game', action="store_true")
-    parser.add_argument('--today', help='todays games', action="store_true")
-    parser.add_argument('--tomorrow', help='tomorrow games', action="store_true")
+    parser.add_argument('--today','-t', help='todays games', action="store_true")
+    parser.add_argument(
+        '--tomorrow', '-to', help='tomorrow games', action="store_true")
     args = parser.parse_args()
     if args.tomorrow:
-        data=get_data(TOMORROW_URL)
+        data = get_data(TOMORROW_URL)
+    elif args.today:
+        data = get_data(TODAY_URL)
+    else:
+        data = get_data(TODAY_URL)
     if args.w:
         data = [x for x in data if x['station']]
     for match in data:
@@ -65,3 +71,5 @@ def main():
         second_team = colored(match['away'], "cyan")
         vs = colored('VS', "white", attrs=['bold', 'blink'])
         print u"{:10} {:40} {:40} {:30} {:40}".format(match_time, channels, first_team, vs, second_team)
+
+main()
