@@ -74,3 +74,4 @@ def main():
         vs = colored('VS', "white", attrs=['bold', 'blink'])
         print u"{:10} {:40} {:40} {:30} {:40}".format(match_time, channels, first_team, vs, second_team)
 
+main()
