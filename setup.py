@@ -6,7 +6,7 @@ from setuptools import setup
 
 setup(
     name='footix',
-    version='2.0.0',
+    version='2.0.1',
     description="soccer schedule",
     long_description="xxx",
     author='Walid Saad',
