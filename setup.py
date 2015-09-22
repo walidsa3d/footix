@@ -6,7 +6,7 @@ from setuptools import setup
 
 setup(
     name='footix',
-    version='2.0.1',
+    version='2.0.2',
     description="soccer schedule",
     long_description="xxx",
     author='Walid Saad',
@@ -17,7 +17,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=['lxml', 'beautifulsoup4', 'requests==2.6.2', 'requests-cache'],
+    install_requires=['lxml', 'beautifulsoup4', 'requests==2.7.0', 'requests-cache'],
     entry_points={"console_scripts": ["footix=footix.cli:main"]},
     classifiers=[
         'Development Status :: 4  - Beta',
