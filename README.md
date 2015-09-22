@@ -1,4 +1,5 @@
 #Footix
+![Build](https://travis-ci.org/walidsa3d/footix.svg?branch=master)
 Today's Football Fixtures
 ##Overview
 

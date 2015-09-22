@@ -10,17 +10,19 @@ import requests_cache
 from bs4 import BeautifulSoup as bs
 
 urls = {'today': 'http://www.getyourfixtures.com/all/fixtures/today/football',
-          'tomorrow': 'http://www.getyourfixtures.com/all/fixtures/tomorrow/football'
-          }
+        'tomorrow': 'http://www.getyourfixtures.com/all/fixtures/tomorrow/football'
+        }
 time_offset = '+01:00'
 time_offset = requests.utils.quote(time_offset)
 timezone_url = "http://www.getyourfixtures.com/setTimeZone.php?offset={}".format(
     time_offset)
 
+
 def get_data(day):
     matches = []
     session = requests_cache.CachedSession(
-        '/tmp/footix_cache', backend='sqlite', expire_after=7200)
+       '/tmp/footix_cache', backend='sqlite', expire_after=7200)
+    #session=requests.Session()
     session.get(timezone_url)
     response = session.get(urls[day])
     soup = bs(response.content, "lxml")
