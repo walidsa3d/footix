@@ -1,2 +1,4 @@
 include LICENSE
-include *.md
+include README.md
+include test-requirements.txt
+include requirements.txt
