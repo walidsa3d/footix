@@ -16,13 +16,11 @@ time_offset = '+01:00'
 time_offset = requests.utils.quote(time_offset)
 timezone_url = "http://www.getyourfixtures.com/setTimeZone.php?offset={}".format(
     time_offset)
-requests_cache.install_cache(
-    '/tmp/footix_cache', backend='sqlite', expire_after=7200)
-
 
 def get_data(day):
     matches = []
-    session = requests_cache.CachedSession()
+    session = requests_cache.CachedSession(
+        '/tmp/footix_cache', backend='sqlite', expire_after=7200)
     session.get(timezone_url)
     response = session.get(urls[day])
     soup = bs(response.content, "lxml")

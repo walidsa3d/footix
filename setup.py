@@ -19,7 +19,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=['beautifulsoup4==4.4.0', 'requests==2.4.3', 'requests-cache==0.4.10'],
+    install_requires=['lxml', 'beautifulsoup4', 'requests', 'requests-cache'],
     entry_points={"console_scripts": ["footix=footix.cli:main"]},
     classifiers=[
         'Development Status :: 4  - Beta',
