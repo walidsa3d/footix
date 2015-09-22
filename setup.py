@@ -1,14 +1,12 @@
-import os
+from os import path
 
 from setuptools import find_packages
 from setuptools import setup
 
-#req_file = os.path.join(os.path.dirname(__file__), 'requirements.txt')
-#requires = [i.strip() for i in open(req_file).readlines()]
 
 setup(
     name='footix',
-    version='1.2.0',
+    version='2.0.0',
     description="soccer schedule",
     long_description="xxx",
     author='Walid Saad',
