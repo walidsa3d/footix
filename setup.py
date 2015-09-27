@@ -1,12 +1,10 @@
-from os import path
-
 from setuptools import find_packages
 from setuptools import setup
 
 
 setup(
     name='footix',
-    version='2.0.2',
+    version='2.1.0',
     description="soccer schedule",
     long_description="xxx",
     author='Walid Saad',
