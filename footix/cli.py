@@ -4,6 +4,8 @@ import argparse
 
 import footix
 
+from prettytable import HEADER
+from prettytable import PrettyTable
 from termcolor import colored
 
 
@@ -23,10 +25,18 @@ def main():
         data = footix.get_data('today')
     if args.w:
         data = [x for x in data if x['station']]
+    output = PrettyTable(["Time", "Channels", "Home", "Away"])
+    output.align = "l"
+    output.border = True
+    output.hrules = HEADER
+    output.horizontal_char = "_"
     for match in data:
         match_time = colored(match['time'], "red", "on_yellow")
         channels = colored(" ".join(match['station']), "blue", "on_white")
         first_team = colored(match['home'], "green")
         second_team = colored(match['away'], "cyan")
-        vs = colored('VS', "white", attrs=['bold', 'blink'])
-        print u"{:10} {:40} {:40} {:30} {:40}".format(match_time, channels, first_team, vs, second_team)
+        output.add_row([match_time, channels, first_team, second_team])
+    output.add_row(["", "", "", ""])
+    print output
+
+main()

@@ -21,7 +21,7 @@ timezone_url = "http://www.getyourfixtures.com/setTimeZone.php?offset={}".format
 def get_data(day):
     matches = []
     session = requests_cache.CachedSession(
-       '/tmp/footix_cache', backend='sqlite', expire_after=7200)
+       '/tmp/foo_cache', backend='sqlite', expire_after=7200)
     #session=requests.Session()
     session.get(timezone_url)
     response = session.get(urls[day])
