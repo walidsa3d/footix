@@ -39,4 +39,4 @@ def main():
     output.add_row(["", "", "", ""])
     print output
 
-main()
+
