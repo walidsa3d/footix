@@ -18,11 +18,11 @@ timezone_url = "http://www.getyourfixtures.com/setTimeZone.php?offset={}".format
     time_offset)
 
 
-def get_data(day):
+def get_data(day, cache=True):
     matches = []
     session = requests_cache.CachedSession(
-       '/tmp/foo_cache', backend='sqlite', expire_after=7200)
-    #session=requests.Session()
+        '/tmp/foo_cache', backend='sqlite', expire_after=7200)
+    # session=requests.Session()
     session.get(timezone_url)
     response = session.get(urls[day])
     soup = bs(response.content, "lxml")

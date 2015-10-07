@@ -13,8 +13,17 @@ $ cd footix
 $ python setup.py install
 ```
 ##Usage
+show today's matches
 ```
-
+$ footix 
+```
+show only TV viewable matches
+```
+$ footix -w
+```
+show tomorrow's matches
+```
+$ footix -to
 ```
 ###Demo
 
