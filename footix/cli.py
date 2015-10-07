@@ -4,14 +4,15 @@ import argparse
 
 import footix
 
+from . import __version__
 from prettytable import HEADER
 from prettytable import PrettyTable
 from termcolor import colored
 
-
 def main():
     parser = argparse.ArgumentParser(usage="-h for full usage")
-    parser.add_argument('-w', help='watchable game', action="store_true")
+    parser.add_argument('-V','--version', action='version', version=__version__)
+    parser.add_argument('-w', help='watchable games', action="store_true")
     parser.add_argument(
         '--today', '-t', help='todays games', action="store_true")
     parser.add_argument(
