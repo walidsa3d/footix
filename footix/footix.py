@@ -1,13 +1,12 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Author: walid
 
 
 import re
 import requests
 import requests_cache
 
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup as BS
 
 urls = {'today': 'http://www.getyourfixtures.com/all/fixtures/today/football',
         'tomorrow': 'http://www.getyourfixtures.com/all/fixtures/tomorrow/football'
@@ -25,10 +24,11 @@ def get_data(day, cache=True):
     # session=requests.Session()
     session.get(timezone_url)
     response = session.get(urls[day])
-    soup = bs(response.content, "lxml")
-    for div in soup.find_all("div", {"class": "match"}):
+    soup = BS(response.content, "lxml")
+    for div in soup.find_all("div", class_="match"):
         if div.select("div.home") and div.select("div.away"):
             time = div.select("div.time span")[0].get_text().strip()
+            competition = div.find(class_="competition").get_text().strip()
             home = div.select("div.home")[0].get_text().strip()
             away = div.select("div.away")[0].get_text().strip()
             stations = div.select("div.stations ul li.country-qa")
@@ -38,7 +38,7 @@ def get_data(day, cache=True):
             else:
                 stations = []
             matches.append(
-                {"time": time, "station": stations, "home": home, "away": away})
+                {"time": time, "competition": competition, "station": stations, "home": home, "away": away})
     return matches
 
 

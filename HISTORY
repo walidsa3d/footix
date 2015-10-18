@@ -1,0 +1,126 @@
+Changelog
+=========
+
+%%version%% (unreleased)
+------------------------
+
+- Merge branch 'dev' [walid]
+
+- Update README.md. [walid]
+
+- Some fixes. [walid]
+
+2.1.0 (2015-09-27)
+------------------
+
+- Bump version. [walid]
+
+- Prettier output using prettytable. [walid]
+
+2.0.2 (2015-09-22)
+------------------
+
+- Fix problems with requests 2.7.0. [walid]
+
+  requests 2.7.0 works after removing the cache created by previous
+  version
+
+2.0.1 (2015-09-22)
+------------------
+
+- Bump version. [walid]
+
+- Revert to version 2.6.2 of requests. [walid]
+
+  requests-cache doesn't work with 2.7
+
+2.0.0 (2015-09-22)
+------------------
+
+- Bump version 2.0. [walid]
+
+- Fix tests, setup.py. [walid]
+
+- Add tests. [walid]
+
+- Add cli.py. [walid]
+
+1.3.0 (2015-09-20)
+------------------
+
+- Update README. [walid]
+
+- Merge branch 'master' of github.com:walidsa3d/footix. [walid]
+
+- Fix wrong times use requests_cache CachedSession instead of
+  monkeypatching requests. [walid]
+
+- Fix wrong times use requests_cache CachedSession instead of
+  monkeypatching requests. [walid]
+
+  Closes #1
+
+- Merge branch 'dev' [walid]
+
+- Small fix. [walid]
+
+- Merge branch 'dev' [walid]
+
+- Merge branch 'dev' [walid]
+
+  Conflicts:
+  	footix/__init__.py
+  	setup.cfg
+  	setup.py
+
+1.2.0 (2015-09-19)
+------------------
+
+- Cache requests. [walid]
+
+1.1.0 (2015-09-19)
+------------------
+
+- Bump version. [walid]
+
+- Fix setup.cfg, license. [walid]
+
+- Display tomorrow games. [walid]
+
+  added a commandline switch --tomorrow to display tomorrow's games
+  the default behavior is t display today's
+
+  Closes #4
+
+- Fix setup.cfg. [walid]
+
+1.0.2 (2015-09-18)
+------------------
+
+- Bump version: 1.0.1 → 1.0.2. [walid]
+
+- Merge branch 'dev' [walid]
+
+- Fix setup.py. [walid]
+
+1.0.1 (2015-09-18)
+------------------
+
+- Bump version: 1.0.0 → 1.0.1. [walid]
+
+- Fix bumpversion config. [walid]
+
+- Add bumpversion config. [walid]
+
+- Update readme. [walid]
+
+1.0.0 (2015-09-18)
+------------------
+
+- Fix channel names too long      new file:   AUTHORS     new file:
+  HISTORY     modified:   LICENSE     modified:   README.md   new file:
+  setup.cfg   new file:   tests/__init__.py. [walid]
+
+- Style: format code, add LICENSE and MANIFEST.in. [walid]
+
+

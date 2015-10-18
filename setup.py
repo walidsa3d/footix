@@ -11,9 +11,9 @@ except ImportError:
 
 setup(
     name='footix',
-    version='2.1.0',
+    version='2.2.0',
     description="soccer schedule",
-    long_description="xxx",
+    long_description=read_md('README.md'),
     author='Walid Saad',
     author_email='walid.sa3d@gmail.com',
     url='https://github.com/walidsa3d/footix',
@@ -25,12 +25,11 @@ setup(
     install_requires=['lxml', 'beautifulsoup4', 'requests==2.7.0', 'requests-cache'],
     entry_points={"console_scripts": ["footix=footix.cli:main"]},
     classifiers=[
-        'Development Status :: 4  - Beta',
+        'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: End Users/Desktop',
         'Operating System :: OS Independent',
         'Natural Language :: English',
-        'Operating System :: OS Independent',
         'Programming Language :: Python :: 2',
         'Topic :: Utilities'
     ]
