@@ -5,6 +5,7 @@ Today's Football Fixtures
 
 ##Install (automatic)
 ```
+$ pip install footix
 ```
 ##Install (manual)
 ```
