@@ -21,7 +21,6 @@ def get_data(day, cache=True):
     matches = []
     session = requests_cache.CachedSession(
         '/tmp/foo_cache', backend='sqlite', expire_after=7200)
-    # session=requests.Session()
     session.get(timezone_url)
     response = session.get(urls[day])
     soup = BS(response.content, "lxml")
