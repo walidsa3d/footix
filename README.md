@@ -26,10 +26,11 @@ show tomorrow's matches
 ```
 $ footix -to
 ```
-###Demo
+#Demo
 
+![demo](https://github.com/walidsa3d/footix/blob/master/footix.gif)
 
-##License
+#License
 ```
 The MIT License (MIT)
 
