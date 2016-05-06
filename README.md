@@ -1,19 +1,22 @@
-#Footix
+# Footix
 ![Build](https://travis-ci.org/walidsa3d/footix.svg?branch=master)
-Today's Football Fixtures
-##Overview
+![downloads](https://img.shields.io/pypi/dm/footix.svg)
+![license](https://img.shields.io/pypi/l/footix.svg)
+![version](https://img.shields.io/pypi/v/footix.svg)
 
-##Install (automatic)
+Today's Football Fixtures
+
+## Install (automatic)
 ```
 $ pip install footix
 ```
-##Install (manual)
+## Install (manual)
 ```
 $ git clone git@github.com:walidsa3d/footix.git
 $ cd footix
 $ python setup.py install
 ```
-##Usage
+## Usage
 show today's matches
 ```
 $ footix 
@@ -26,11 +29,11 @@ show tomorrow's matches
 ```
 $ footix -to
 ```
-#Demo
+## Demo
 
 ![demo](https://github.com/walidsa3d/footix/blob/master/footix.gif)
 
-#License
+## License
 ```
 The MIT License (MIT)
 
