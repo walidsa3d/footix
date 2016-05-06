@@ -11,7 +11,7 @@ except ImportError:
 
 setup(
     name='footix',
-    version='2.2.0',
+    version='2.3.0',
     description="soccer schedule",
     long_description=read_md('README.md'),
     author='Walid Saad',

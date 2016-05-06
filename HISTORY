@@ -4,6 +4,21 @@ Changelog
 %%version%% (unreleased)
 ------------------------
 
+- Update requirements. [walid]
+
+- Update README. [walid]
+
+- Remove dead code, add demo. [walid]
+
+- Update readme. [walid]
+
+2.2.0 (2015-10-18)
+------------------
+
+- Show game's context (competition) [walid]
+
+  closes #3
+
 - Merge branch 'dev' [walid]
 
 - Update README.md. [walid]
